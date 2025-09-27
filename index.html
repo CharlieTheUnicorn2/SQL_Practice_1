@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Practice Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SQL Practice Simulator</h1>
+            <p>Master SQL queries with interactive challenges and real-time feedback</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="left-panel">
+                <h2 class="section-title">Current Challenge</h2>
+                
+                <div class="problem-card" id="problem-card">
+                    <div class="problem-title" id="problem-title">
+                        Challenge 1: Basic SELECT
+                    </div>
+                    <p id="problem-description">
+                        Select all employees from the employees table.
+                    </p>
+                </div>
+
+                <div class="tables-container" id="tables-container">
+                    <!-- Tables will be populated by JavaScript -->
+                </div>
+
+                <div class="syntax-reference">
+                    <h3 class="section-title">SQL Syntax Reference</h3>
+                    <div class="syntax-item">
+                        <strong class="sql-keyword">SELECT</strong>
+                    </div>
+                    <div class="syntax-item">
+                        <strong class="sql-keyword">FROM</strong>
+                    </div>
+                    <div class="syntax-item">
+                        <strong class="sql-keyword">WHERE</strong>
+                    </div>
+                    <div class="syntax-item">
+                        <strong class="sql-keyword">ORDER BY</strong>
+                    </div>
+                    <div class="syntax-item">
+                        <strong class="sql-keyword">ASC</strong>
+                    </div>
+                    <div class="syntax-item">
+                        <strong class="sql-keyword">DESC</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <h2 class="section-title">Your SQL Query</h2>
+                
+                <div class="query-section">
+                    <textarea 
+                        class="query-input" 
+                        id="sql-query" 
+                        placeholder="Enter your SQL query here...&#10;Example: SELECT * FROM employees;"
+                        spellcheck="false"
+                    ></textarea>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="executeQuery()">Execute Query</button>
+                        <button class="btn btn-secondary" onclick="clearQuery()">Clear</button>
+                        <button class="btn btn-secondary" onclick="nextChallenge()">Next Challenge</button>
+                    </div>
+                </div>
+
+                <div class="result-container">
+                    <div class="result-title">Query Results</div>
+                    <div id="query-result">
+                        <p style="color: #6c757d; font-style: italic;">Enter and execute a query to see results...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
