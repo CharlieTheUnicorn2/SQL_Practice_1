@@ -11,9 +11,11 @@
         <div class="header">
             <h1>SQL Practice Simulator</h1>
             <p>Master SQL queries with interactive challenges and real-time feedback</p>
+            <div class="loading" id="loading">Loading database...</div>
         </div>
         
-        <div class="main-content">
+        <div class="main-content" id="main-content" style="display: none;">
+            <!-- LEFT PANEL START -->
             <div class="left-panel">
                 <h2 class="section-title">Current Challenge</h2>
                 
@@ -22,7 +24,7 @@
                         Challenge 1: Basic SELECT
                     </div>
                     <p id="problem-description">
-                        Select all employees from the employees table.
+                        Select all personnel from the personnel table.
                     </p>
                 </div>
 
@@ -42,17 +44,31 @@
                         <strong class="sql-keyword">WHERE</strong>
                     </div>
                     <div class="syntax-item">
+                        <strong class="sql-keyword">JOIN</strong>
+                    </div>
+                    <div class="syntax-item">
                         <strong class="sql-keyword">ORDER BY</strong>
                     </div>
                     <div class="syntax-item">
-                        <strong class="sql-keyword">ASC</strong>
+                        <strong class="sql-keyword">GROUP BY</strong>
                     </div>
                     <div class="syntax-item">
-                        <strong class="sql-keyword">DESC</strong>
+                        <strong class="sql-keyword">LIMIT</strong>
+                    </div>
+                    <div class="syntax-item">
+                        <strong class="sql-keyword">COUNT</strong>
+                    </div>
+                    <div class="syntax-item">
+                        <strong class="sql-keyword">SUM</strong>
+                    </div>
+                    <div class="syntax-item">
+                        <strong class="sql-keyword">AVG</strong>
                     </div>
                 </div>
             </div>
+            <!-- LEFT PANEL END -->
 
+            <!-- RIGHT PANEL START -->
             <div class="right-panel">
                 <h2 class="section-title">Your SQL Query</h2>
                 
@@ -60,14 +76,15 @@
                     <textarea 
                         class="query-input" 
                         id="sql-query" 
-                        placeholder="Enter your SQL query here...&#10;Example: SELECT * FROM employees;"
+                        placeholder="Enter your SQL query here...&#10;Example: SELECT * FROM personnel;&#10;&#10;Try complex queries like:&#10;SELECT p.name, h.salary FROM personnel p JOIN hr h ON p.personnel_id = h.personnel_id ORDER BY h.salary DESC LIMIT 5;"
                         spellcheck="false"
                     ></textarea>
                     
                     <div class="button-group">
                         <button class="btn btn-primary" onclick="executeQuery()">Execute Query</button>
                         <button class="btn btn-secondary" onclick="clearQuery()">Clear</button>
-                        <button class="btn btn-secondary" onclick="nextChallenge()">Next Challenge</button>
+                        <button class="btn btn-secondary" onclick="previousChallenge()" id="prev-btn">Previous Challenge</button>
+                        <button class="btn btn-secondary" onclick="nextChallenge()" id="next-btn">Next Challenge</button>
                     </div>
                 </div>
 
@@ -78,9 +95,12 @@
                     </div>
                 </div>
             </div>
+            <!-- RIGHT PANEL END -->
         </div>
     </div>
 
+    <!-- Load SQL.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
