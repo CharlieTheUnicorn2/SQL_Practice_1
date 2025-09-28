@@ -21,7 +21,7 @@ async function initializeDatabase() {
         
         // Hide loading, show main content
         document.getElementById('loading').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
+        document.getElementById('main-content').style.display = 'grid';
         
         // Initialize UI
         initializeTables();
