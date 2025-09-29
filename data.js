@@ -410,9 +410,11 @@ const challenges = [
         difficulty: "Beginner",
         autoCheck: true,
         specificColumns: ['name', 'department_id']
-    },
+    }
 
     // EASY (Challenges 6-10): Basic JOINs and simple functions
+    // commenting out everything after question 5 to fix later. Re-add the comma from above later.
+    /*
     {
         title: "First JOIN Query",
         description: "Show each person's name and their salary by joining the personnel and hr tables.",
@@ -551,6 +553,7 @@ const challenges = [
         difficulty: "Intermediate-Advanced",
         autoCheck: true,
         flexibleColumns: true
+        */
     }
 ];
 
