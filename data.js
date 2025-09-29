@@ -372,7 +372,7 @@ const challenges = [
     {
         title: "Basic SELECT",
         description: "Select all personnel from the personnel table to see who works at the hospital.",
-        solution: "SELECT * FROM personnel", // Reference solution for validation
+        solution: "SELECT * FROM personnel;", // Reference solution for validation
         hint: "Use SELECT * to select all columns",
         difficulty: "Beginner",
         autoCheck: true
@@ -380,7 +380,7 @@ const challenges = [
     {
         title: "Specific Columns", 
         description: "Select only the name and department_id from the personnel table.",
-        solution: "SELECT name, department_id FROM personnel",
+        solution: "SELECT name, department_id FROM personnel;",
         hint: "List the specific columns you want after SELECT, separated by commas",
         difficulty: "Beginner",
         autoCheck: true,
@@ -389,7 +389,7 @@ const challenges = [
     {
         title: "Filter by Department",
         description: "Select all personnel who work in department_id 1 (Emergency department).",
-        solution: "SELECT * FROM personnel WHERE department_id = 1",
+        solution: "SELECT * FROM personnel WHERE department_id = 1;",
         hint: "Use WHERE to filter rows based on conditions",
         difficulty: "Beginner",
         autoCheck: true
@@ -397,7 +397,7 @@ const challenges = [
     {
         title: "Filter by Salary",
         description: "Select all records from the hr table where salary is greater than 100000.",
-        solution: "SELECT * FROM hr WHERE salary > 100000",
+        solution: "SELECT * FROM hr WHERE salary > 100000;",
         hint: "Use WHERE with comparison operators like >, <, =",
         difficulty: "Beginner",
         autoCheck: true
@@ -405,7 +405,7 @@ const challenges = [
     {
         title: "Order Results",
         description: "Select all personnel names and department_ids, ordered alphabetically by name.",
-        solution: "SELECT name, department_id FROM personnel ORDER BY name",
+        solution: "SELECT name, department_id FROM personnel ORDER BY name;",
         hint: "Use ORDER BY to sort results",
         difficulty: "Beginner",
         autoCheck: true,
@@ -417,7 +417,7 @@ const challenges = [
     {
         title: "First JOIN Query",
         description: "Show each person's name and their salary by joining the personnel and hr tables.",
-        solution: "SELECT p.name, h.salary FROM personnel p JOIN hr h ON p.personnel_id = h.personnel_id",
+        solution: "SELECT personnel.name, hr.salary FROM personnel JOIN hr ON personnel.personnel_id = hr.personnel_id;",
         hint: "Use JOIN to connect tables. Give tables aliases (p, h) to make it easier",
         difficulty: "Easy",
         autoCheck: true,
@@ -426,7 +426,7 @@ const challenges = [
     {
         title: "JOIN with Filtering", 
         description: "Show names and salaries for personnel earning more than 150000, ordered by salary (highest first).",
-        solution: "SELECT p.name, h.salary FROM personnel p JOIN hr h ON p.personnel_id = h.personnel_id WHERE h.salary > 150000 ORDER BY h.salary DESC",
+        solution: "SELECT personnel.name, hr.salary FROM personnel JOIN hr ON personnel.personnel_id = hr.personnel_id WHERE hr.salary > 150000 ORDER BY hr.salary DESC;",
         hint: "Combine JOIN, WHERE, and ORDER BY clauses",
         difficulty: "Easy",
         autoCheck: true,
@@ -435,13 +435,14 @@ const challenges = [
     {
         title: "LIMIT Results",
         description: "Find the top 5 highest-paid personnel. Show names and salaries.",
-        solution: "SELECT p.name, h.salary FROM personnel p JOIN hr h ON p.personnel_id = h.personnel_id ORDER BY h.salary DESC LIMIT 5",
+        solution: "SELECT personnel.name, hr.salary FROM personnel JOIN hr ON personnel.personnel_id = hr.personnel_id ORDER BY hr.salary DESC LIMIT 5;",
         hint: "Use LIMIT after ORDER BY to get just the top results",
         difficulty: "Easy",
         autoCheck: true,
         specificColumns: ['name', 'salary']
     },
-    {
+    /*
+                          {
         title: "Three Table JOIN",
         description: "Show department names, personnel names, and salaries. You'll need to join departments, personnel, and hr tables.",
         solution: "SELECT d.name as department, p.name as personnel_name, h.salary FROM departments d JOIN personnel p ON d.id = p.department_id JOIN hr h ON p.personnel_id = h.personnel_id",
@@ -449,11 +450,11 @@ const challenges = [
         difficulty: "Easy",
         autoCheck: true,
         flexibleColumns: true // Column names can vary as long as data is right
-    },
+    },*/
     {
         title: "Patient Information",
         description: "Show patient names, their conditions, and their assigned personnel names.",
-        solution: "SELECT pat.name as patient_name, pat.condition, per.name as assigned_personnel FROM patients pat JOIN personnel per ON pat.assigned_personnel_id = per.personnel_id",
+        solution: "SELECT patients.name, patients.condition, personnel.name FROM patients JOIN personnel ON patients.assigned_personnel_id = personnel.personnel_id;",
         hint: "JOIN patients with personnel table",
         difficulty: "Easy",
         autoCheck: true,
@@ -470,7 +471,7 @@ const challenges = [
         autoCheck: true,
         flexibleColumns: true
     },
-    {
+    /*{
         title: "Average Salary",
         description: "Find the average salary across all hospital personnel.",
         solution: "SELECT AVG(salary) as average_salary FROM hr",
@@ -496,11 +497,11 @@ const challenges = [
         difficulty: "Intermediate",
         autoCheck: true,
         flexibleColumns: true
-    },
+    },*/
     {
         title: "Patient Wait Times",
         description: "Find patients with wait times over 60 minutes. Show patient name, condition, wait time, and assigned personnel name.",
-        solution: "SELECT pat.name, pat.condition, pat.wait_time, per.name as assigned_personnel FROM patients pat JOIN personnel per ON pat.assigned_personnel_id = per.personnel_id WHERE pat.wait_time > 60",
+        solution: "SELECT patients.name, patients.condition, patients.wait_time, personnel.name FROM patients JOIN personnel ON patients.assigned_personnel_id = personnel.personnel_id WHERE patients.wait_time > 60;",
         hint: "Use WHERE to filter wait times and JOIN to get personnel names",
         difficulty: "Intermediate",
         autoCheck: true,
@@ -511,13 +512,13 @@ const challenges = [
     {
         title: "Above Average Salaries",
         description: "Find all personnel who earn more than the average salary. Show names and salaries.",
-        solution: "SELECT p.name, h.salary FROM personnel p JOIN hr h ON p.personnel_id = h.personnel_id WHERE h.salary > (SELECT AVG(salary) FROM hr)",
+        solution: "SELECT p.name, h.salary FROM personnel p JOIN hr h ON p.personnel_id = h.personnel_id WHERE h.salary > (SELECT AVG(salary) FROM hr);",
         hint: "Use a subquery with AVG() in the WHERE clause",
         difficulty: "Intermediate-Advanced",
         autoCheck: true,
         specificColumns: ['name', 'salary']
     },
-    {
+    /*{
         title: "Department Budget Analysis",
         description: "Find departments where the total staff salaries exceed the department budget. Show department name, budget, and total salaries.",
         solution: "SELECT d.name, d.budget, SUM(h.salary) as total_salaries FROM departments d JOIN personnel p ON d.id = p.department_id JOIN hr h ON p.personnel_id = h.personnel_id GROUP BY d.id, d.name, d.budget HAVING SUM(h.salary) > d.budget",
@@ -534,17 +535,17 @@ const challenges = [
         difficulty: "Intermediate-Advanced",
         autoCheck: true,
         flexibleColumns: true
-    },
+    },*/
     {
         title: "Staff Workload Analysis", 
         description: "Find personnel who are assigned to more than 5 patients. Show personnel name and patient count.",
-        solution: "SELECT per.name, COUNT(pat.patient_id) as patient_count FROM personnel per JOIN patients pat ON per.personnel_id = pat.assigned_personnel_id GROUP BY per.personnel_id, per.name HAVING COUNT(pat.patient_id) > 5",
+        solution: "SELECT personnel.name, COUNT(patients.patient_id) FROM personnel JOIN patients ON patients.assigned_personnel_id = personnel.personnel_id GROUP BY personnel.name HAVING COUNT(patients.patient_id) > 5;",
         hint: "Use COUNT() with GROUP BY and HAVING to filter groups",
         difficulty: "Intermediate-Advanced",
         autoCheck: true,
         flexibleColumns: true
     },
-    {
+    /*{
         title: "Complex Department Analysis",
         description: "For each department, show: department name, number of staff, average salary, and total equipment cost. Order by total equipment cost (highest first).",
         solution: "SELECT d.name, COUNT(DISTINCT p.personnel_id) as staff_count, AVG(h.salary) as avg_salary, COALESCE(SUM(DISTINCT e.purchase_cost), 0) as total_equipment_cost FROM departments d LEFT JOIN personnel p ON d.id = p.department_id LEFT JOIN hr h ON p.personnel_id = h.personnel_id LEFT JOIN equipment e ON d.id = e.department_id GROUP BY d.id, d.name ORDER BY total_equipment_cost DESC",
@@ -553,7 +554,7 @@ const challenges = [
         autoCheck: true,
         flexibleColumns: true
         
-    }
+    }*/
 ];
 
 // Export data for use in main script
