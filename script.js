@@ -302,19 +302,16 @@ function displayResults(results) {
             return;
         }
 
-        // Check if results should be limited
         const totalRows = result.values.length;
-        const displayRows = totalRows > 10 ? result.values.slice(0, 10) : result.values;
-        const isLimited = totalRows > 10;
-
-        // Create table
+        
+        // Create table - NO MORE AUTOMATIC LIMITING
         html += '<table><thead><tr>';
         result.columns.forEach(col => {
             html += `<th>${col}</th>`;
         });
         html += '</tr></thead><tbody>';
 
-        displayRows.forEach(row => {
+        result.values.forEach(row => {
             html += '<tr>';
             row.forEach(cell => {
                 html += `<td>${cell !== null ? cell : 'NULL'}</td>`;
@@ -324,12 +321,8 @@ function displayResults(results) {
 
         html += '</tbody></table>';
         
-        // Show row count and limitation message
-        if (isLimited) {
-            html += `<p style="margin-top: 15px; color: #6c757d; font-style: italic;">Showing first 10 rows of ${totalRows} total results. Add LIMIT 10 to your query to avoid this automatic limit.</p>`;
-        } else {
-            html += `<p style="margin-top: 15px; color: #6c757d; font-style: italic;">Returned ${totalRows} row(s)</p>`;
-        }
+        // Show row count
+        html += `<p style="margin-top: 15px; color: #6c757d; font-style: italic;">Returned ${totalRows} row(s)</p>`;
     });
     
     resultContainer.innerHTML = html;
