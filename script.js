@@ -163,7 +163,7 @@ function insertHospitalData() {
         INSERT INTO departments (id, name, budget, bed_capacity, head_of_department_id) 
         VALUES (?, ?, ?, ?, ?)
     `);
-    HospitalData.departments.forEach(dept => {
+    hospitalData.departments.forEach(dept => {
         deptStmt.run([dept.id, dept.name, dept.budget, dept.bed_capacity, dept.head_of_department_id]);
     });
     deptStmt.free();
@@ -173,7 +173,7 @@ function insertHospitalData() {
         INSERT INTO personnel (personnel_id, name, department_id) 
         VALUES (?, ?, ?)
     `);
-    HospitalData.personnel.forEach(person => {
+    hospitalData.personnel.forEach(person => {
         personnelStmt.run([person.personnel_id, person.name, person.department_id]);
     });
     personnelStmt.free();
@@ -183,7 +183,7 @@ function insertHospitalData() {
         INSERT INTO hr (personnel_id, department_id, salary, hire_date) 
         VALUES (?, ?, ?, ?)
     `);
-    HospitalData.hr.forEach(hr => {
+    hospitalData.hr.forEach(hr => {
         hrStmt.run([hr.personnel_id, hr.department_id, hr.salary, hr.hire_date]);
     });
     hrStmt.free();
@@ -193,7 +193,7 @@ function insertHospitalData() {
         INSERT INTO patients (patient_id, name, age, ethnicity, assigned_personnel_id, department_id, condition, wait_time, admission_date) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
-    HospitalData.patients.forEach(patient => {
+    hospitalData.patients.forEach(patient => {
         patientsStmt.run([
             patient.patient_id, patient.name, patient.age, patient.ethnicity,
             patient.assigned_personnel_id, patient.department_id, patient.condition,
@@ -207,7 +207,7 @@ function insertHospitalData() {
         INSERT INTO insurance (patient_id, insurance_provider, policy_number, coverage_percentage, deductible, expiry_date) 
         VALUES (?, ?, ?, ?, ?, ?)
     `);
-    HospitalData.insurance.forEach(ins => {
+    hospitalData.insurance.forEach(ins => {
         insuranceStmt.run([ins.patient_id, ins.insurance_provider, ins.policy_number, ins.coverage_percentage, ins.deductible, ins.expiry_date]);
     });
     insuranceStmt.free();
@@ -217,7 +217,7 @@ function insertHospitalData() {
         INSERT INTO medications (medication_id, name, quantity_in_stock, cost_per_unit, expiry_date, purchased_by_personnel_id) 
         VALUES (?, ?, ?, ?, ?, ?)
     `);
-    HospitalData.medications.forEach(med => {
+    hospitalData.medications.forEach(med => {
         medicationsStmt.run([med.medication_id, med.name, med.quantity_in_stock, med.cost_per_unit, med.expiry_date, med.purchased_by_personnel_id]);
     });
     medicationsStmt.free();
@@ -227,7 +227,7 @@ function insertHospitalData() {
         INSERT INTO procedures (procedure_id, name, base_cost, duration_minutes, department_id, requires_anesthesia) 
         VALUES (?, ?, ?, ?, ?, ?)
     `);
-    HospitalData.procedures.forEach(proc => {
+    hospitalData.procedures.forEach(proc => {
         proceduresStmt.run([proc.procedure_id, proc.name, proc.base_cost, proc.duration_minutes, proc.department_id, proc.requires_anesthesia]);
     });
     proceduresStmt.free();
@@ -237,7 +237,7 @@ function insertHospitalData() {
         INSERT INTO appointments (appointment_id, patient_id, personnel_id, procedure_id, appointment_datetime, status) 
         VALUES (?, ?, ?, ?, ?, ?)
     `);
-    HospitalData.appointments.forEach(appt => {
+    hospitalData.appointments.forEach(appt => {
         appointmentsStmt.run([appt.appointment_id, appt.patient_id, appt.personnel_id, appt.procedure_id, appt.appointment_datetime, appt.status]);
     });
     appointmentsStmt.free();
@@ -247,7 +247,7 @@ function insertHospitalData() {
         INSERT INTO equipment (equipment_id, equipment_type, manufacturer, department_id, status, last_maintenance, purchase_cost) 
         VALUES (?, ?, ?, ?, ?, ?, ?)
     `);
-    HospitalData.equipment.forEach(equip => {
+    hospitalData.equipment.forEach(equip => {
         equipmentStmt.run([equip.equipment_id, equip.equipment_type, equip.manufacturer, equip.department_id, equip.status, equip.last_maintenance, equip.purchase_cost]);
     });
     equipmentStmt.free();
